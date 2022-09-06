@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  backend-tweet:
+    image: kacperkwiatkowski/backend-tweet
+    container_name: backend-tweet
+    hostname: backend-tweet
+
+  frontend-tweet:
+    image: kacperkwiatkowski/frontend-tweet
+    container_name: frontend-tweet
+    hostname: frontend-tweet
+
+  nginx-tweet:
+    image: kacperkwiatkowski/nginx-tweet
+    hostname: nginx-tweet
+    ports:
+      - "80:80"

@@ -1,0 +1,10 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+script:
+  - docker build -t kacperkwiatkowski/nginx-tweet ./nginx/Dockerfile
+  - echo $DOCKER_PASSWORD | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push kacperkwiatkowski/nginx-tweet
