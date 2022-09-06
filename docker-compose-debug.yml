@@ -10,13 +10,18 @@ services:
       DB_NAME: mongo-tweets
       DB_HOST: mongo-tweets-prod
       DB_PORT: 27017
+    ports:
+      - "8080:8080"
     depends_on:
       - mongo-tweets-prod
-
+    networks:
+      - nginx-network
 
   frontend-tweet-prod:
     image: kacperkwiatkowski/frontend-tweet
     container_name: frontend-tweet-prod
+    networks:
+      - nginx-network
 
   nginx-tweet-prod:
     container_name: nginx-tweet-prod
@@ -28,6 +33,8 @@ services:
     depends_on:
       - backend-tweet-prod
       - frontend-tweet-prod
+    networks:
+      - nginx-network
 
   mongo-tweets-prod:
     image: mongo
@@ -38,3 +45,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongousername
       MONGO_INITDB_ROOT_PASSWORD: mongopassword
+    networks:
+      - nginx-network
+
+networks:
+  nginx-network:
+    driver: bridge
