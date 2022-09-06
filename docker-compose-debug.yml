@@ -1,36 +1,37 @@
 version: '3.9'
 
 services:
-  backend-tweet:
+  backend-tweet-prod:
     image: kacperkwiatkowski/backend-tweet
-    container_name: backend-tweet
+    container_name: backend-tweet-prod
     environment:
       DB_USERNAME: mongousername
       DB_PASSWORD: mongopassword
       DB_NAME: mongo-tweets
-      DB_HOST: mongo-tweets
+      DB_HOST: mongo-tweets-prod
       DB_PORT: 27017
     depends_on:
-      - mongo-tweets
+      - mongo-tweets-prod
 
 
-  frontend-tweet:
+  frontend-tweet-prod:
     image: kacperkwiatkowski/frontend-tweet
-    container_name: frontend-tweet
+    container_name: frontend-tweet-prod
 
-  nginx-tweet:
+  nginx-tweet-prod:
+    container_name: nginx-tweet-prod
     build:
-      dockerfile: ./nginx/Dockerfile.dev
+      dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
       - "3050:80"
     depends_on:
-      - backend-tweet
-      - frontend-tweet
+      - backend-tweet-prod
+      - frontend-tweet-prod
 
-  mongo-tweets:
+  mongo-tweets-prod:
     image: mongo
-    container_name: mongo-tweets
+    container_name: mongo-tweets-prod
     restart: always
     ports:
       - "27017:27017"
