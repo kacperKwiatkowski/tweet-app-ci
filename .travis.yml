@@ -12,10 +12,10 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: eu-central-1
-  app: tweet-app-ci
-  env: Tweetappci-env
+  app: tweet-app-complete
+  env: Tweetappcomplete-env
   bucket_name: elasticbeanstalk-eu-central-1-195077249767
-  bucket_path: tweet-app-complete
+  bucket_path: tweet-app-bucket
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
