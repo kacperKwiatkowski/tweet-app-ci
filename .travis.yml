@@ -12,8 +12,8 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: eu-central-1
-  app: tweet-app-complete
-  env: Tweetappcomplete-env
+  app: tweet-app-ui-be
+  env: Tweetappuibe-env
   bucket_name: elasticbeanstalk-eu-central-1-195077249767
   bucket_path: tweet-app-bucket
   on:
