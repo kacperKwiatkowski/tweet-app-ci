@@ -5,13 +5,15 @@ services:
     image: kacperkwiatkowski/backend-tweet
     container_name: backend-tweet-prod
     environment:
-      MAIL_USERNAME: kacper.kwiatkowski.cognizant@gmail.com
-      MAIL_PASSWORD: rjjlkwyzdsnxktyz
-      AWS_ACCESS_KEY: AKIAS224CTLTXQ5SKKXQ
-      AWS_SECRET_KEY: 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
+      MAIL_USERNAME: "${MAIL_USERNAME}"
+      MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      AWS_ACCESS_KEY: "${AWS_ACCESS_KEY}"
+      AWS_SECRET_KEY: "${AWS_SECRET_KEY}"
     hostname: backend-tweet-prod
     ports:
       - "8080:8080"
+    depends_on:
+      - mongo-tweets-prod
     networks:
       - nginx-network
 
