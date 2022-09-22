@@ -5,17 +5,17 @@ services:
     image: kacperkwiatkowski/backend-tweet
     container_name: backend-tweet-prod
     environment:
-      DB_USERNAME: mongousername
-      DB_PASSWORD: mongopassword
-      DB_NAME: mongo-tweets
-      DB_HOST: mongo-tweets-prod
-      DB_PORT: 27017
+      MAIL_USERNAME: "${MAIL_USERNAME}"
+      MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      AWS_ACCESS_KEY: "${AWS_ACCESS_KEY}"
+      AWS_SECRET_KEY: "${AWS_SECRET_KEY}"
+    hostname: backend-tweet-prod
     ports:
       - "8080:8080"
-    depends_on:
-      - mongo-tweets-prod
     networks:
       - nginx-network
+    env_file:
+      - .env
 
   frontend-tweet-prod:
     image: kacperkwiatkowski/frontend-tweet
@@ -36,18 +36,7 @@ services:
     networks:
       - nginx-network
 
-  mongo-tweets-prod:
-    image: mongo
-    container_name: mongo-tweets-prod
-    restart: always
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongousername
-      MONGO_INITDB_ROOT_PASSWORD: mongopassword
-    networks:
-      - nginx-network
-
 networks:
   nginx-network:
     driver: bridge
+
